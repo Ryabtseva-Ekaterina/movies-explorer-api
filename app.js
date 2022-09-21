@@ -11,7 +11,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-mongoose.connect(process.env.DB_CONN, {
+mongoose.connect(process.env.NODE_ENV === 'production' ? process.env.DB_CONN : 'mongodb://localhost:27017/moviesdb', {
   useNewUrlParser: true,
 });
 
@@ -25,6 +25,6 @@ app.use(errors());
 
 app.use(errorsHandler);
 
-app.listen(process.env.PORT, () => {
-  console.log(`App listening on port ${process.env.PORT}`);
+app.listen(process.env.NODE_ENV === 'production' ? process.env.PORT : 3000, () => {
+  console.log(`App listening on port ${process.env.NODE_ENV === 'production' ? process.env.PORT : 3000}`);
 });
