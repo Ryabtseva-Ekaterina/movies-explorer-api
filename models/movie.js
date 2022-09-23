@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const validator = require('validator');
+const BadRequest = require('../errors/badRequest');
 
 const movieSchema = new mongoose.Schema({
   country: {
@@ -29,30 +31,30 @@ const movieSchema = new mongoose.Schema({
   image: {
     type: String,
     required: true,
-    validate: {
-      validator(value) {
-        return /https?:\/\/(\w{3}\.)?[1-9a-z\-.]{1,}\w\w(\/[1-90a-z.,_@%&?+=~/-]{1,}\/?)?#?/i.test(value);
-      },
+    validate(value) {
+      if (!validator.isURL(value)) {
+        throw new BadRequest({ message: 'Некорректная ссылка' });
+      }
     },
   },
 
   trailerLink: {
     type: String,
     required: true,
-    validate: {
-      validator(value) {
-        return /https?:\/\/(\w{3}\.)?[1-9a-z\-.]{1,}\w\w(\/[1-90a-z.,_@%&?+=~/-]{1,}\/?)?#?/i.test(value);
-      },
+    validate(value) {
+      if (!validator.isURL(value)) {
+        throw new BadRequest({ message: 'Некорректная ссылка' });
+      }
     },
   },
 
   thumbnail: {
     type: String,
     required: true,
-    validate: {
-      validator(value) {
-        return /https?:\/\/(\w{3}\.)?[1-9a-z\-.]{1,}\w\w(\/[1-90a-z.,_@%&?+=~/-]{1,}\/?)?#?/i.test(value);
-      },
+    validate(value) {
+      if (!validator.isURL(value)) {
+        throw new BadRequest({ message: 'Некорректная ссылка' });
+      }
     },
   },
 
