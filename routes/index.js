@@ -9,9 +9,10 @@ const NotFound = require('../errors/notFound');
 router.post('/signin', signinValidate, login);
 router.post('/signup', signupValidate, createUser);
 
-router.use('/users', auth, users);
-router.use('/movies', auth, movies);
-router.use('*', auth, (req, res, next) => {
+router.use(auth);
+router.use('/users', users);
+router.use('/movies', movies);
+router.use('*', (req, res, next) => {
   next(new NotFound('Страница не найдена'));
 });
 
