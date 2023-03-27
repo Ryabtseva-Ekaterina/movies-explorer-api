@@ -25,6 +25,6 @@ app.use(errors());
 
 app.use(errorsHandler);
 
-app.listen(process.env.NODE_ENV === 'production' ? process.env.PORT : 3000, () => {
-  console.log(`App listening on port ${process.env.NODE_ENV === 'production' ? process.env.PORT : 3000}`);
+app.listen(process.env.NODE_ENV === 'production' ? process.env.PORT : 3001, () => {
+  console.log(`App listening on port ${process.env.NODE_ENV === 'production' ? process.env.PORT : 3001}`);
 });
