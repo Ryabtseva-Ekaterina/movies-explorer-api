@@ -11,7 +11,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-mongoose.connect(process.env.NODE_ENV === 'production' ? process.env.DB_CONN : 'mongodb://localhost:27017/moviesdb', {
+mongoose.connect(process.env.NODE_ENV === 'production' ? process.env.MONGODB_URI : 'mongodb://localhost:27017/moviesdb', {
   useNewUrlParser: true,
 });
 
