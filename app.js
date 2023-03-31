@@ -9,7 +9,7 @@ const corsOption = require('./middleware/corsOption');
 const { requestLogger, errorLogger } = require('./middleware/logger');
 
 const app = express();
-app.use(corsOption);
+app.use(corsOption());
 app.use(express.json());
 
 mongoose.connect(process.env.NODE_ENV === 'production' ? process.env.MONGODB_URI : 'mongodb://localhost:27017/moviesdb', {
