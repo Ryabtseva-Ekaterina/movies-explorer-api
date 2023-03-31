@@ -17,8 +17,9 @@ const corsOption = (req, res, next) => {
   }
 
   if (method === 'OPTIONS') {
-    res.header('Access-Control-Allow-Methods', DEFAULT_ALLOWED_METHODS);
-    res.header('Access-Control-Allow-Headers', requestHeaders);
+    res.status(200);
+    res.setheader('Access-Control-Allow-Methods', DEFAULT_ALLOWED_METHODS);
+    res.setheader('Access-Control-Allow-Headers', requestHeaders);
     return res.end();
   }
 
