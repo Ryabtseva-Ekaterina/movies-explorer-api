@@ -1,6 +1,6 @@
 const allowedCors = [
-  'https://movies-explorer-api-umber.vercel.app/',
-  'http://movies-explorer-api-umber.vercel.app/',
+  'https://movies-explorer-frontend-henna.vercel.app/',
+  'http://movies-explorer-frontend-henna.vercel.app/',
   'http://localhost:3001',
 ];
 
