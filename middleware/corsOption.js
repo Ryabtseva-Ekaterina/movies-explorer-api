@@ -1,16 +1,28 @@
-const METHODS = 'GET, OPTIONS, PATCH, DELETE, POST, PUT';
-const requestHeader = 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version';
+const allowedCors = [
+  'https://movies-explorer-api-umber.vercel.app/',
+  'http://movies-explorer-api-umber.vercel.app/',
+  'http://localhost:3001',
+];
 
-module.exports = (req, res) => {
-  res.setHeader('Access-Control-Allow-Credentials', 'false');
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', METHODS);
-  res.setHeader('Access-Control-Allow-Headers', requestHeader);
+const corsOption = (req, res, next) => {
+  const { origin } = req.headers;
+  const { method } = req;
+  const requestHeaders = req.headers['access-control-request-headers'];
 
-  if (req.method === 'OPTIONS') {
-    res.status(200);
-    res.header('Access-Control-Allow-Methods', METHODS);
-    res.header('Access-Control-Allow-Headers', requestHeader);
-    res.end();
+  const DEFAULT_ALLOWED_METHODS = ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'];
+
+  if (allowedCors.includes(origin)) {
+    res.header('Access-Control-Allow-Origin', origin);
+    res.header('Access-Control-Allow-Credentials', true);
   }
+
+  if (method === 'OPTIONS') {
+    res.header('Access-Control-Allow-Methods', DEFAULT_ALLOWED_METHODS);
+    res.header('Access-Control-Allow-Headers', requestHeaders);
+    return res.end();
+  }
+
+  return next();
 };
+
+module.exports = corsOption;
