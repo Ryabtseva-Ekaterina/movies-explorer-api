@@ -6,7 +6,6 @@ const allowedCors = [
 
 const corsOption = (req, res, next) => {
   const { origin } = req.headers;
-  const { method } = req;
   const requestHeaders = req.headers['access-control-request-headers'];
 
   const DEFAULT_ALLOWED_METHODS = ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'];
@@ -16,7 +15,7 @@ const corsOption = (req, res, next) => {
     res.header('Access-Control-Allow-Credentials', true);
   }
 
-  if (method === 'OPTIONS') {
+  if (req.method === 'OPTIONS') {
     res.status(200);
     res.setheader('Access-Control-Allow-Methods', DEFAULT_ALLOWED_METHODS);
     res.setheader('Access-Control-Allow-Headers', requestHeaders);
