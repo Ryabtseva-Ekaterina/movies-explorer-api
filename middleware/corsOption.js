@@ -1,4 +1,4 @@
-const allowedCORS = ['*'];
+const allowedCORS = '*';
 const METHODS = 'GET, OPTIONS, PATCH, DELETE, POST, PUT';
 
 module.exports = (req, res, next) => {
