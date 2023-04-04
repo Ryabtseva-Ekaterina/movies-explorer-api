@@ -1,28 +1,10 @@
-const allowedCors = [
-  'https://movies-explorer-frontend-henna.vercel.app/',
-  'http://movies-explorer-frontend-henna.vercel.app/',
-  'http://localhost:3001',
-];
-
-const corsOption = (req, res, next) => {
-  const { origin } = req.headers;
-  const requestHeaders = req.headers['access-control-request-headers'];
-
-  const DEFAULT_ALLOWED_METHODS = ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'];
-
-  if (allowedCors.includes(origin)) {
-    res.header('Access-Control-Allow-Origin', origin);
-    res.header('Access-Control-Allow-Credentials', true);
-  }
+module.exports = (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version');
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
 
   if (req.method === 'OPTIONS') {
-    res.status(200);
-    res.setheader('Access-Control-Allow-Methods', DEFAULT_ALLOWED_METHODS);
-    res.setheader('Access-Control-Allow-Headers', requestHeaders);
-    return res.end();
+    return res.status(200).json(({ body: 'OK' }));
   }
-
-  return next();
 };
-
-module.exports = corsOption;
